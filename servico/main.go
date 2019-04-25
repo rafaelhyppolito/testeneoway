@@ -19,7 +19,8 @@ func index(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/", index)
-	fmt.Println("Serviço ativo e ouvindo na porta 8080.")
-	http.ListenAndServe(":8080", nil)
+	servico.LerTexto("base.txt")
+	//http.HandleFunc("/", index)
+	//fmt.Println("Serviço ativo e ouvindo na porta 8080.")
+	//http.ListenAndServe(":8080", nil)
 }
