@@ -8,6 +8,9 @@ Possuir Banco de dados PostgreSQL instalado;
 
 Possuir Git instalado.
 
+# *** IMPORTANTE ***
+Remover a primeira linha do arquivo (Linha com os nomes das colunas)
+
 # Executando
 1 - Abra o pgAdmin4 e dentro da base "postgres" execute os comandos contidos no arquivo "arquivoauxiliares/db.sql";
 
