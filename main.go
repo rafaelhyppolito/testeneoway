@@ -22,16 +22,15 @@ func index(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	connection := repo.Connect()
-	servico.LerTexto("base.txt")
+
+	servico.LerTexto("base_teste.txt")
+	repo.ExecSQL(repo.InsertFinal(), repo.Connect())
+
+	//repo.InsertSQL("INSERT INTO base(cpf,priv,incompleto) VALUES('12345678900',1,0)", repo.Connect())
 
 	//http.HandleFunc("/", index)
 	//fmt.Println("Serviço ativo e ouvindo na porta 8080.")
 	//http.ListenAndServe(":8080", nil)
-
 	
-	connection.Close()
-
-
-
+	repo.Connect().Close()
 }

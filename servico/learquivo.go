@@ -1,6 +1,7 @@
 package servico
 
 import (
+	"github.com/rafaelhyppolito/testeneoway/repo"
 	"strings"
 	//"fmt"
 	"bufio"
@@ -28,7 +29,19 @@ func removeespacosduplo(texto string) string {
 		texto = strings.ReplaceAll(texto,"  ", " ")
 	}	
 	texto = strings.ReplaceAll(texto,",", ".")
-	texto = strings.ReplaceAll(texto," ", ",")
+	texto = strings.ReplaceAll(texto," ", "','")
+	texto = "INSERT INTO basetmp(cpf,priv,incompleto,dtultcompra,ticketmedio,ticketultcompra,lojmaisfrequente,lojultcompra) VALUES ('"+texto+"'); "
+	//fmt.Printf(texto)
+
+	//finalinsert := "SELECT SCRIPT FROM SCRIPTS WHERE ID = 1"
+
+
+	repo.ExecSQL(texto, repo.Connect())
+	//repo.ExecSQL(finalinsert, repo.Connect())
+	//repo.ConsultaSQL(finalinsert, repo.Connect())
+
+	//fmt.Println(insere)
+
 	return texto
 }
 
@@ -46,6 +59,7 @@ func LerTexto(caminhoDoArquivo string) ([]string, error) {
 	// Cria um scanner que le cada linha do arquivo
 	var linhas []string
 	scanner := bufio.NewScanner(arquivo)
+
 	for scanner.Scan() {
 		linhas = append(linhas, removeespacosduplo(scanner.Text()))
 	}
