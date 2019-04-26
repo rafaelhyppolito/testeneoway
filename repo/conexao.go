@@ -24,6 +24,7 @@ func Connect() *sql.DB {
 	return connection
 }
 
+//Funcao que executa comandos em SQL. Não tem retorno
 func ExecSQL(sql string, connection *sql.DB) {
 	sqlStatement := sql
 	_, err := connection.Exec(sqlStatement)
