@@ -2,14 +2,10 @@ package main
 
 import (
 	"github.com/rafaelhyppolito/testeneoway/repo"
-	//"unicode"
-	//"strings"
-	//"fmt"
+	"fmt"
 	"github.com/rafaelhyppolito/testeneoway/servico"
 	"html/template"
-//	"database/sql"  // Pacote Database SQL para realizar Query
 	"net/http"      // Gerencia URLs e Servidor Web
-//	"text/template" // Gerencia templates
 )
 
 func index(w http.ResponseWriter, r *http.Request) {
@@ -21,16 +17,24 @@ func index(w http.ResponseWriter, r *http.Request) {
 	tpl.Execute(w, data)
 }
 
+//Funcao que realiza o carregamento do arquivo e sua importação para o banco de dados
+func CarregaArquivo()  {
+	connection := repo.Connect()
+	//Limpa a tabela temporária
+	repo.ExecSQL(repo.TruncateTmp(), connection)
+	//Lê e higieniza os dados do arquivo inserindo-os na tabela temporária
+	servico.LerTexto("base_teste.txt")
+	//Insere na tabela final, convertendo os dados para os formatos corretos
+	repo.ExecSQL(repo.InsertFinal(), connection)
+	fmt.Println("Arquivo carregado com sucesso!")
+	//repo.InsertSQL("INSERT INTO base(cpf,priv,incompleto) VALUES('12345678900',1,0)", repo.Connect())
+}
+
 func main() {
 
-	servico.LerTexto("base_teste.txt")
-	repo.ExecSQL(repo.InsertFinal(), repo.Connect())
+	http.HandleFunc("/", index)
+	fmt.Println("Serviço ativo e ouvindo na porta 8080.")
+	http.ListenAndServe(":8080", nil)
 
-	//repo.InsertSQL("INSERT INTO base(cpf,priv,incompleto) VALUES('12345678900',1,0)", repo.Connect())
-
-	//http.HandleFunc("/", index)
-	//fmt.Println("Serviço ativo e ouvindo na porta 8080.")
-	//http.ListenAndServe(":8080", nil)
-	
-	repo.Connect().Close()
+	//CarregaArquivo()
 }
