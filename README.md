@@ -2,16 +2,20 @@
 Teste de manipulação de dados e persistência em base de dados relacional
 
 # Requisitos
-Possuir GO instalado.
+Possuir GO instalado;
 
-Possuir Banco de dados PostgreSQL instalado.\r\n
+Possuir Banco de dados PostgreSQL instalado;
+
+Possuir Git instalado.
 
 # Executando
 1 - Abra o pgAdmin4 e dentro da base "postgres" execute os comandos contidos no arquivo "arquivoauxiliares/db.sql";
 
 2 - Realize o download do projeto (ou clone com git) para dentro do repositório de projetos do Go (C:\Go\src\github.com\rafaelhyppolito);
 
-3 - Execute o arquivo "inicio.exe".
+3 - Abra o Git na pasta do projeto e execute o comando "GOOS=windows GOARCH=386 go build -o inicio.exe" (build Windows);
+
+4 - Execute o arquivo "inicio.exe".
 
 # Forma de utilizar
 1 - Após executar o arquivo "inicio.exe", o serviço ficará escutando na porta 8080, então basta acessar no browser o seguinte endereço: "localhost:8080";
