@@ -6,7 +6,7 @@ import(
 	_ "github.com/lib/pq"
 )
 
-// Retornar uma forma de conexão com o banco
+//Funcao que retorna uma forma de conexão com o banco
 func Connect() *sql.DB {
 
 	driverConfig := "user=postgres password=root port=5432 database=postgres sslmode=disable"

@@ -4,8 +4,7 @@ import (
 	"github.com/rafaelhyppolito/testeneoway/repo"
 	"fmt"
 	"github.com/rafaelhyppolito/testeneoway/servico"
-	//"html/template"
-	"net/http"      // Gerencia URLs e Servidor Web
+	"net/http"
 )
 
 //Funcao que realiza o carregamento do arquivo e sua importação para o banco de dados
@@ -18,7 +17,6 @@ func CarregaArquivo(caminho string)  {
 	//Insere na tabela final, convertendo os dados para os formatos corretos
 	repo.ExecSQL(repo.InsertFinal(), connection)
 	fmt.Println("Arquivo carregado com sucesso!")
-	//repo.InsertSQL("INSERT INTO base(cpf,priv,incompleto) VALUES('12345678900',1,0)", repo.Connect())
 }
 
 //Funcao para tratar as requisicoes POST e GET
@@ -44,7 +42,9 @@ func index(w http.ResponseWriter, r *http.Request) {
     }
 }
 
+//Funcao principal que é executada assim que o aplicação é iniciada
 func main() {
+
 	http.HandleFunc("/", index)
 	fmt.Println("Serviço ativo e ouvindo na porta 8080.")
 	http.ListenAndServe(":8080", nil)

@@ -1,5 +1,6 @@
 package model
 
+//Estrutura da tabela principal
 type Base struct {
 	Cpf string `json:"cpf" db:"cpf"`
 	Private string `json:"Private" db:"Priv"`
